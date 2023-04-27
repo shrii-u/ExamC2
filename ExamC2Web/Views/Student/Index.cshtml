@@ -24,8 +24,11 @@
             <h2 class="text-primary">Student List</h2>
         </div>
         <div class="col-6 text-end">
-            <a asp-controller="Student" asp-action="Upsert" class="btn btn-primary">
+            <a asp-controller="Student" asp-action="Create" class="btn btn-primary">
                 <i class="bi bi-plus-circle"></i> &nbsp; Create New Student
+            </a>
+            <a asp-controller="Course" asp-action="Index" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp;   Course
             </a>
         </div>
     </div>
@@ -80,14 +83,19 @@
                     <td>
                         @obj.CourseTotalPrice
                     </td>
-                   @* <td>
+                   <td>
                         <div class="w-75 btn-group" role="group">
-                            <a asp-controller="Course" asp-action="Index" asp-route-id="@obj.StudentId" class="btn btn-info">View course</a>
+                            
                         </div>
-                    </td>*@
+                    </td>
                     <td>
+                        <a asp-controller="StudentCourse" asp-action="GetCourse" asp-route-id="@obj.StudentId" class="btn btn-primary mx-2">
+                            <i class="bi bi-eye-fill"></i>
+                        </a>
+
                         <div class="w-75 btn-group" role="group">
-                           @* <a asp-controller="Course" asp-action="Upsert" class="btn btn-outline-warning mx-2" asp-route-id="@obj.StudentId"><i class="bi bi-plus-circle"></i>Add Course</a>*@
+                            
+                            <a asp-controller="StudentCourse" asp-action="Add" class="btn btn-outline-warning mx-2" asp-route-id="@obj.StudentId"><i class="bi bi-plus-circle"></i>Add Course</a>
                             <a asp-controller="Student" asp-action="Edit" asp-route-id="@obj.StudentId" class="btn btn-outline-info mx-2"><i class="bi bi-pencil-square"></i>Edit</a>
                             <a asp-controller="Student" asp-action="Delete" asp-route-id="@obj.StudentId" class="btn btn-outline-danger mx-2"><i class="bi bi-trash"></i>Delete</a>
                         </div>

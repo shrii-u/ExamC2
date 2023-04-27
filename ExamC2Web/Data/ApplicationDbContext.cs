@@ -12,5 +12,6 @@ namespace ExamC2Web.Data
         public DbSet<Course> Courses { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentCourse> StudentsCourse { get; set;}
+        public DbSet<Admin> Admins { get; set; }
     }
 }

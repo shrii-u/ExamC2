@@ -18,6 +18,29 @@ namespace ExamC2Web.Migrations
                 .HasAnnotation("ProductVersion", "6.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("ExamC2Web.Models.Admin", b =>
+                {
+                    b.Property<int>("AdminId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("AdminEmail")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("AdminName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("AdminPasswords")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("AdminId");
+
+                    b.ToTable("Admins");
+                });
+
             modelBuilder.Entity("ExamC2Web.Models.Course", b =>
                 {
                     b.Property<int>("Id")
@@ -89,35 +112,15 @@ namespace ExamC2Web.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
+                    b.Property<string>("CourseName")
+                        .HasColumnType("longtext");
+
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("StudentId");
-
                     b.ToTable("StudentsCourse");
-                });
-
-            modelBuilder.Entity("ExamC2Web.Models.StudentCourse", b =>
-                {
-                    b.HasOne("ExamC2Web.Models.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ExamC2Web.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Student");
                 });
 #pragma warning restore 612, 618
         }
