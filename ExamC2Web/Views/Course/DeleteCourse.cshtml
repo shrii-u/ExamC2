@@ -1,0 +1,38 @@
+﻿@model Course
+
+<form method="post" asp-action="DeleteCourse">
+	<input asp-for="Id" hidden />
+
+	<div class="row">
+		<div class="col-10">
+			<div class="border p-3 mt-4 row">
+				<div class="col-12 pb-2">
+					<h2 class="text-primary text-center">Delete course</h2>
+					<hr />
+				</div>
+				@*<div asp-validation-summary="All"></div>*@
+				<div class="mb-3">
+					<label asp-for="Name"></label>
+					<input disabled asp-for="Name" class="form-control" />
+
+				</div>
+				<div class="mb-3">
+					<label asp-for="price"></label>
+					<input asp-for="price" class="form-control" />
+
+				</div>
+
+				<button type="submit"  class="btn btn-outline-danger" style="width:150px">Delete</button>
+
+				<a asp-controller="Course" asp-action="Index" class="btn btn-outline-secondary" style="width:150px">
+					Back to List
+				</a>
+			</div>
+		</div>
+	</div>
+</form>
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

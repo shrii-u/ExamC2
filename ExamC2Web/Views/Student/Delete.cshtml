@@ -1,0 +1,42 @@
+﻿@model Student
+
+<form method="post" asp-action="Delete">
+	<input asp-for="StudentId" hidden />
+
+	<div class="row">
+		<div class="col-10">
+			<div class="border p-3 mt-4 row">
+				<div class="col-12 pb-2">
+					<h2 class="text-primary text-center">Delete student</h2>
+					<hr />
+				</div>
+				@*<div asp-validation-summary="All"></div>*@
+				<div class="mb-3">
+					<label asp-for="StudentName"></label>
+					<input title="PLEASE ENTER TITLE" asp-for="StudentName" class="form-control" />
+					<span asp-validation-for="StudentName" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="RollNo"></label>
+					<input asp-for="RollNo" class="form-control" />
+					<span asp-validation-for="RollNo" class="text-danger"></span>
+				</div>
+				<div class="mb-3 col-6 text-dark">
+					<label asp-for="Phone"></label>
+					<input asp-for="Phone" class="form-control" />
+					<span asp-validation-for="Phone" class="text-danger"></span>
+				</div>
+				<button type="submit" class="btn btn-primary" style="width:150px">Delete</button>
+
+				<a asp-controller="Admin" asp-action="Dashboard" class="btn btn-secondary" style="width:150px">
+					Back to List
+				</a>
+			</div>
+		</div>
+	</div>
+</form>
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

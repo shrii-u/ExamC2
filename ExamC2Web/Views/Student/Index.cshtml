@@ -1,0 +1,122 @@
+﻿@model IEnumerable<ExamC2Web.Models.Student>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <h1 class="text-secondary">Upload Excel File</h1>
+    <form asp-controller="Student" asp-action="Index" method="post" enctype="multipart/form-data">
+        <table class="border-1">
+            <thead>
+                <div class="form-group border-1">
+                    <label for="file">Choose a file:</label>
+                    <input type="file" id="uploadBox" name="file" class="form-control-file" />
+                </div>
+                <button type="submit" onclick="return validateInput()" class="btn btn-primary"><i class="bi bi-upload"></i>&nbsp; Upload</button>
+            </thead>
+        </table>
+    </form>
+</div>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Student List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Student" asp-action="Upsert" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp; Create New Student
+            </a>
+        </div>
+    </div>
+    <br /><br />
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+
+                <th>Student Name</th>
+                <th>Email</th>
+                <th>Contact No</th>
+                <th>Roll No</th>
+                <th>Address</th>
+                <th>State</th>
+                <th>City</th>
+                <th>ZipCode</th>
+                <th>Course Total Price</th>
+               
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+
+                    <td>
+                        @obj.StudentName
+                    </td>
+                    <td>
+                        @obj.Email
+                    </td>
+                    <td>
+                        @obj.Phone
+                    </td>
+                    <td>
+                        @obj.RollNo
+                    </td>
+                    <td>
+                        @obj.Address
+                    </td>
+                    <td>
+                        @obj.State
+                    </td>
+                    <td>
+                        @obj.City
+                    </td>
+                    <td>
+                        @obj.PostalCode
+                    </td>
+                    <td>
+                        @obj.CourseTotalPrice
+                    </td>
+                   @* <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Course" asp-action="Index" asp-route-id="@obj.StudentId" class="btn btn-info">View course</a>
+                        </div>
+                    </td>*@
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                           @* <a asp-controller="Course" asp-action="Upsert" class="btn btn-outline-warning mx-2" asp-route-id="@obj.StudentId"><i class="bi bi-plus-circle"></i>Add Course</a>*@
+                            <a asp-controller="Student" asp-action="Edit" asp-route-id="@obj.StudentId" class="btn btn-outline-info mx-2"><i class="bi bi-pencil-square"></i>Edit</a>
+                            <a asp-controller="Student" asp-action="Delete" asp-route-id="@obj.StudentId" class="btn btn-outline-danger mx-2"><i class="bi bi-trash"></i>Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    <script>
+
+
+
+        function validateInput() {
+            if (document.getElementById("uploadBox").value == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please upload  Excel',
+
+                })
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+}
