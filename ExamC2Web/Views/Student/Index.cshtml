@@ -6,6 +6,7 @@
 <div class="container">
     <h1 class="text-secondary">Upload Excel File</h1>
     <form asp-controller="Student" asp-action="Index" method="post" enctype="multipart/form-data">
+        <div class="col-6">
         <table class="border-1">
             <thead>
                 <div class="form-group border-1">
@@ -14,7 +15,14 @@
                 </div>
                 <button type="submit" onclick="return validateInput()" class="btn btn-primary"><i class="bi bi-upload"></i>&nbsp; Upload</button>
             </thead>
+            
         </table>
+        </div>
+        <div class="col-12 offset-10">
+            <a asp-controller="Home" asp-action="Login" class="btn btn-outline-danger ">
+                Logout
+            </a>
+        </div>
     </form>
 </div>
 
@@ -23,6 +31,7 @@
         <div class="col-6">
             <h2 class="text-primary">Student List</h2>
         </div>
+       
         <div class="col-6 text-end">
             <a asp-controller="Student" asp-action="Create" class="btn btn-primary">
                 <i class="bi bi-plus-circle"></i> &nbsp; Create New Student
@@ -34,7 +43,7 @@
     </div>
     <br /><br />
 
-    <table class="table table-bordered table-striped" style="width:100%">
+    <table class="table table-bordered table-striped" id="myTable" style="width:100%">
         <thead>
             <tr>
 
@@ -47,8 +56,8 @@
                 <th>City</th>
                 <th>ZipCode</th>
                 <th>Course Total Price</th>
-               
-                <th></th>
+                <th>View</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -85,17 +94,17 @@
                     </td>
                    <td>
                         <div class="w-75 btn-group" role="group">
-                            
+                            <a asp-controller="StudentCourse" asp-action="GetCourse" asp-route-id="@obj.StudentId" class="btn btn-outline-warning mx-2">
+                                <i class="bi bi-eye-fill"></i>View Course
+                            </a>
                         </div>
                     </td>
                     <td>
-                        <a asp-controller="StudentCourse" asp-action="GetCourse" asp-route-id="@obj.StudentId" class="btn btn-primary mx-2">
-                            <i class="bi bi-eye-fill"></i>
-                        </a>
+                       
 
                         <div class="w-75 btn-group" role="group">
                             
-                            <a asp-controller="StudentCourse" asp-action="Add" class="btn btn-outline-warning mx-2" asp-route-id="@obj.StudentId"><i class="bi bi-plus-circle"></i>Add Course</a>
+                            <a asp-controller="StudentCourse" asp-action="Add" class="btn btn-outline-primary mx-2" asp-route-id="@obj.StudentId"><i class="bi bi-plus-circle"></i>Add Course</a>
                             <a asp-controller="Student" asp-action="Edit" asp-route-id="@obj.StudentId" class="btn btn-outline-info mx-2"><i class="bi bi-pencil-square"></i>Edit</a>
                             <a asp-controller="Student" asp-action="Delete" asp-route-id="@obj.StudentId" class="btn btn-outline-danger mx-2"><i class="bi bi-trash"></i>Delete</a>
                         </div>
@@ -106,6 +115,7 @@
     </table>
 </div>
 @section scripts{
+    <script src="~/js/product.js"></script>
     @{
         <partial name="_ValidationScriptsPartial" />
     }

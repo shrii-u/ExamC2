@@ -18,10 +18,18 @@ namespace ExamC2Web.Controllers
         {
             _db = db;
         }
+        #region APICALL
+        public IActionResult Allstudents()
+        {
+            var students = _db.Students.ToList();
+            return Json(new { data = students });
 
+        }
+        #endregion
         [HttpGet]
         public IActionResult Index(int id)
         {
+           
             IEnumerable<Student> student = _db.Students.ToList();
             return View(student);
         }

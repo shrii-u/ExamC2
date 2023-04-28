@@ -1,8 +1,18 @@
 ﻿@model IEnumerable<StudentCourse>
+
+<div>
+        <a asp-controller="student" asp-action="Index" class="btn btn-outline-danger">Back to student</a>
+ 
+</div>
+
+
+
 <table class="table table-bordered table-striped">
+   
     <thead>
         <tr>
-            <th>Allocated Course</th>
+            <th>Course </th>
+            
 
         </tr>
     </thead>
@@ -11,8 +21,9 @@
         {
             <tr>
                 <td>@obj.CourseName</td>
+               
                 <td>
-                    <a asp-controller="StudentCourse" asp-action="Delete" asp-route-data="@obj.Id" class="btn btn-danger mx-2"><i class="bi bi-trash"></i></a>
+                    <a asp-controller="StudentCourse" asp-action="Delete" asp-route-data="@obj.Id" class="btn btn-danger mx-2"><i class="bi bi-trash"></i>Delete</a>
                 </td>
 
             </tr>

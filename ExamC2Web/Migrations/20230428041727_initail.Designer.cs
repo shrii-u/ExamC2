@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamC2Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230427174023_AddInitials")]
-    partial class AddInitials
+    [Migration("20230428041727_initail")]
+    partial class initail
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -49,7 +49,7 @@ namespace ExamC2Web.Controllers
                     return RedirectToAction("Index","student");
                 }
             }
-            
+            TempData["error"] = "Login Again";
             return RedirectToAction("Login");
         }
     }

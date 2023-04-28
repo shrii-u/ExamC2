@@ -41,6 +41,12 @@ namespace ExamC2Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Check if the course name already exists
+                if (_db.Courses.Any(c => c.Name == obj.Name))
+                {
+                    TempData["error"] = "Course already exist ";
+                    return RedirectToAction("Index","Course");
+                }
 
                 _db.Courses.Add(obj);
                 _db.SaveChanges();
@@ -48,6 +54,17 @@ namespace ExamC2Web.Controllers
                 return RedirectToAction("Index");
             }
             return View(obj);
+
+            //{
+            //    if (ModelState.IsValid)
+            //    {
+
+            //        _db.Courses.Add(obj);
+            //        _db.SaveChanges();
+            //        TempData["success"] = "Product created successfully";
+            //        return RedirectToAction("Index");
+            //    }
+            //    return View(obj);
         }
         public IActionResult Edit(int? id)
         {
@@ -95,31 +112,62 @@ namespace ExamC2Web.Controllers
 
             return View(courseFromDb);
         }
-
-        //POST action method for Deleting the Product
         [HttpPost, ActionName("DeleteCourse")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteCoursePOST(int? id)
         {
-            var obj = _db.Courses.FirstOrDefault(x => x.Id == id);
-
-            if (obj == null)
+            var course = _db.Courses.FirstOrDefault(x => x.Id == id);
+            if (course == null)
             {
                 return NotFound();
             }
 
+            // Remove all records in the StudentsCourse table that refer to the deleted course
+            var studentsCourses = _db.StudentsCourse.Where(sc => sc.CourseId == id);
+            _db.StudentsCourse.RemoveRange(studentsCourses);
 
-
-            _db.Courses.Remove(obj);
-
+            // Remove the course from the Courses table
+            _db.Courses.Remove(course);
+            _db.SaveChanges();
+            var students = _db.Students.ToList();
+            foreach (var student in students)
+            {
+                var studentCourses = _db.StudentsCourse.Where(sc => sc.StudentId == student.StudentId);
+                var totalCoursePrice = studentCourses.Select(sc => sc.Course.price).Sum();
+                student.CourseTotalPrice = totalCoursePrice;
+                _db.Students.Update(student);
+            }
             _db.SaveChanges();
 
-            TempData["success"] = "course Deleted successfully";
-
-
+            TempData["success"] = "Course deleted successfully.";
             return RedirectToAction("Index");
-
         }
+
+
+        //POST action method for Deleting the Product
+        //[HttpPost, ActionName("DeleteCourse")]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult DeleteCoursePOST(int? id)
+        //{
+        //    var obj = _db.Courses.FirstOrDefault(x => x.Id == id);
+
+        //    if (obj == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+
+
+        //    _db.Courses.Remove(obj);
+
+        //    _db.SaveChanges();
+
+        //    TempData["success"] = "course Deleted successfully";
+
+
+        //    return RedirectToAction("Index");
+
+        //}
 
 
     }
