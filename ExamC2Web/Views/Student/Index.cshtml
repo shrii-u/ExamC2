@@ -2,37 +2,38 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div class="row">
+    <div class="col-6">
+<form method="get" asp-action="Index">
+    <label for="searchstring">Search:</label>
+    <input type="text" name="searchstring" id="searchstring" required />
+    <button type="submit" class="btn btn-dark">Search</button>
+</form>
+    </div>
+   
 
-<div class="container">
-    <h1 class="text-secondary">Upload Excel File</h1>
-    <form asp-controller="Student" asp-action="Index" method="post" enctype="multipart/form-data">
-        <div class="col-6">
-        <table class="border-1">
-            <thead>
-                <div class="form-group border-1">
-                    <label for="file">Choose a file:</label>
-                    <input type="file" id="uploadBox" name="file" class="form-control-file" />
-                </div>
-                <button type="submit" onclick="return validateInput()" class="btn btn-primary"><i class="bi bi-upload"></i>&nbsp; Upload</button>
-            </thead>
-            
-        </table>
-        </div>
-        <div class="col-12 offset-10">
-            <a asp-controller="Home" asp-action="Login" class="btn btn-outline-danger ">
-                Logout
-            </a>
-        </div>
-    </form>
+    </div>
+
+
+<div class="col-12 offset-10">
+    <a asp-controller="Home" asp-action="Login" class="btn btn-outline-danger ">
+        Logout
+    </a>
 </div>
-
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
             <h2 class="text-primary">Student List</h2>
         </div>
-       
-        <div class="col-6 text-end">
+        <div class="col-1 card container">
+        <div class="form-group ">
+            <button type="submit" onclick="return validateInput()" class="btn btn-primary"><i class="bi bi-upload"></i>&nbsp; Upload</button>
+            <input type="file" id="uploadBox"  class="form-control-file " />
+        </div>
+
+        </div>
+        <div class="col-12 text-end">
+              
             <a asp-controller="Student" asp-action="Create" class="btn btn-primary">
                 <i class="bi bi-plus-circle"></i> &nbsp; Create New Student
             </a>

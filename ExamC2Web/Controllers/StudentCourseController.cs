@@ -23,7 +23,7 @@ namespace ExamC2Web.Controllers
         }
         public IActionResult GetCourse(int id)
         {
-            var courselist = _db.StudentsCourse.Where(s => s.StudentId == id).ToList();
+            var courselist = _db.StudentsCourse.Where(s => s.StudentId == id ).ToList();
 
             return View(courselist);
         }

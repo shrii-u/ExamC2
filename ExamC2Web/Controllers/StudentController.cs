@@ -27,10 +27,16 @@ namespace ExamC2Web.Controllers
         }
         #endregion
         [HttpGet]
-        public IActionResult Index(int id)
+        public IActionResult Index(string searchstring)
         {
            
             IEnumerable<Student> student = _db.Students.ToList();
+            if (!string.IsNullOrEmpty(searchstring))
+            {
+                student = student.Where(s => s.StudentName.Contains(searchstring));
+               
+
+            }
             return View(student);
         }
         public IActionResult Index(IFormFile file)
