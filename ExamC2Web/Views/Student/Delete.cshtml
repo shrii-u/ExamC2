@@ -26,9 +26,14 @@
 					<input asp-for="Phone" class="form-control" />
 					<span asp-validation-for="Phone" class="text-danger"></span>
 				</div>
-				<button type="submit" class="btn btn-primary" style="width:150px">Delete</button>
+				<div class="mb-3 col-6 text-dark">
+					<label asp-for="Address"></label>
+					<input asp-for="Address" class="form-control" />
+					<span asp-validation-for="Address" class="text-danger"></span>
+				</div>
+				<button type="submit" class="btn btn-outline-danger" style="width:150px">Delete</button>
 
-				<a asp-controller="Admin" asp-action="Dashboard" class="btn btn-secondary" style="width:150px">
+				<a asp-controller="Student" asp-action="Index" class="btn btn-secondary" style="width:150px">
 					Back to List
 				</a>
 			</div>

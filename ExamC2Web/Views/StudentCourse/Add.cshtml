@@ -13,11 +13,11 @@
                 <h2 class="text-dark py-2">Add Course</h2>
             </div>
 
-                <select asp-for="course.Id" asp-items="@Model.CourseList" class="form-select ">
+                <select asp-for="course.Id" asp-items="@Model.CourseList" class="form-select "required>
                     <option disabled selected>--Select Course--</option>
                 </select>
-                <label asp-for="course.Id" name="obj" class="ms-2"></label>
-                <span asp-validation-for="course.Id" class="text-danger"></span>
+              @*  <label asp-for="course.Id" name="obj" class="ms-2"></label>
+                <span asp-validation-for="course.Id" class="text-danger"></span>*@
             </div>
 
 

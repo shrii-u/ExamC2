@@ -50,7 +50,13 @@ namespace ExamC2Web.Controllers
         {
             var coursename = _db.Courses.Where(x => x.Id == obj.course.Id).First();
             var student = _db.Students.Where(x => x.StudentId == StudentId).First();
+            var existingCourse = _db.StudentsCourse.FirstOrDefault(sc => sc.StudentId == StudentId && sc.CourseId == obj.course.Id);
 
+            if (existingCourse != null)
+            {
+                TempData["error"] = "Student is already registered for this course";
+                return RedirectToAction("Index", "Student");
+            }
 
             StudentCourse course = new StudentCourse()
             {

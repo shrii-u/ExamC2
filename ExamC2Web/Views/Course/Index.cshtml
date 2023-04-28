@@ -20,13 +20,11 @@
         <br />
         <table id="tbl" class="table table-bordered table-striped">
             <thead>
-              
-
-                <tr class="text-dark">
+                <tr width="20%" class="text-center">
 
                     <th>courseName</th>
                     <th>CoursePrice</th>
-
+                    <th>Action</th>
 
                 </tr>
             </thead>
@@ -34,12 +32,12 @@
 
                 @foreach (var obj in Model)
                 {
-                    <tr>
+                    <tr width="10%" class="text-center">
 
-                        <td width="40%">
+                        <td>
                             @obj.Name
                         </td>
-                        <td width="40%">
+                        <td>
                             @obj.price
                         </td>
                         <td>
