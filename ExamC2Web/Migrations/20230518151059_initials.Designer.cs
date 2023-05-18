@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamC2Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230428041727_initail")]
-    partial class initail
+    [Migration("20230518151059_initials")]
+    partial class initials
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -122,7 +122,20 @@ namespace ExamC2Web.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CourseId");
+
                     b.ToTable("StudentsCourse");
+                });
+
+            modelBuilder.Entity("ExamC2Web.Models.StudentCourse", b =>
+                {
+                    b.HasOne("ExamC2Web.Models.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
                 });
 #pragma warning restore 612, 618
         }

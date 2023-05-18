@@ -120,7 +120,20 @@ namespace ExamC2Web.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CourseId");
+
                     b.ToTable("StudentsCourse");
+                });
+
+            modelBuilder.Entity("ExamC2Web.Models.StudentCourse", b =>
+                {
+                    b.HasOne("ExamC2Web.Models.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
                 });
 #pragma warning restore 612, 618
         }

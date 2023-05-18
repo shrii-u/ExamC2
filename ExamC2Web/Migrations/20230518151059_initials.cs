@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ExamC2Web.Migrations
 {
-    public partial class initail : Migration
+    public partial class initials : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -90,8 +90,19 @@ namespace ExamC2Web.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_StudentsCourse", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StudentsCourse_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentsCourse_CourseId",
+                table: "StudentsCourse",
+                column: "CourseId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -100,13 +111,13 @@ namespace ExamC2Web.Migrations
                 name: "Admins");
 
             migrationBuilder.DropTable(
-                name: "Courses");
-
-            migrationBuilder.DropTable(
                 name: "Students");
 
             migrationBuilder.DropTable(
                 name: "StudentsCourse");
+
+            migrationBuilder.DropTable(
+                name: "Courses");
         }
     }
 }
